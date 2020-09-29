@@ -34,7 +34,7 @@ export default {
     },
     onAuthInput: function (evt) {
       let test = this.$store.state.ALLOWED_SYMBOLS.exec(evt.target.value)
-      if ( test === null || test[0].length === evt.target.value.length
+      if ( test === null || test[0].length !== evt.target.value.length
       ) {
         evt.target.setCustomValidity("Пожалуйста, используйте только кирилицу, латиницу, цифры и _")
       }  else {
