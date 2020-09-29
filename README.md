@@ -1,24 +1,5 @@
-# ai-nane-nane
+# Ай-нане-нане, дорогой!
 
-## Project setup
-```
-npm install
-```
+Интерфейс цыганского чата для тестового задания на должность Разработчика Vue.js
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Чат доступен по адресу: https://espanol-nikkol.github.io/Ai-nane-nane/
