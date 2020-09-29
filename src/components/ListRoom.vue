@@ -35,22 +35,13 @@ export default {
 
 <style>
   .rooms {
-    width: 300px;
-
-    display: flex;
-    flex-wrap: wrap;
-
     grid-column: 1;
     grid-row: 1/4;
   }
 
-  .rooms__head {
-    width: 170px;
-  }
-
   .room-list {
-    width: 260px;
-    height: 569px;
+    width: 150px;
+    height: 420px;
 
     display: flex;
     flex-wrap: wrap;

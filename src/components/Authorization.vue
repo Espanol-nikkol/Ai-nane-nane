@@ -12,7 +12,7 @@
           required
           @input="onAuthInput"
           placeholder="Ваше имя">
-      <button class="auth-form__btn btn" type="submit">
+      <button class="auth-form__btn" type="submit">
         Отправить
       </button>
     </form>
@@ -33,18 +33,11 @@ export default {
       this.$emit("btn-auth-click")
     },
     onAuthInput: function (evt) {
-      if (
-          this.$store.state.FORBIDDEN_SYMBOLS.test(evt.target.value)
+      let test = this.$store.state.ALLOWED_SYMBOLS.exec(evt.target.value)
+      if ( test === null || test[0].length === evt.target.value.length
       ) {
-        evt.target.setCustomValidity("Пожалуйста, не используйте служебные символы")
-      } else if (evt.target.value.includes("#")) {
-        evt.target.setCustomValidity("Пожалуйста, без #")
-      }
-      else if (
-          evt.target.value.trim() === ""
-      ) {
-        evt.target.setCustomValidity("Имя должно быть")
-      } else {
+        evt.target.setCustomValidity("Пожалуйста, используйте только кирилицу, латиницу, цифры и _")
+      }  else {
         evt.target.setCustomValidity("")
       }
     },

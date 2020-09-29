@@ -1,7 +1,7 @@
 <template>
   <form class="msg-new" v-on:submit.prevent="onSubmit">
     <input
-        class="msg-new__input msg-new__input--room"
+        class="msg-new__room"
         v-if="!isChat"
         @input="onRoomInput"
         id="room-name"
@@ -9,10 +9,10 @@
         maxlength="34"
         required
         placeholder="Новый чат">
-    <textarea class="msg-new__input msg-new__input--text" id="text-msg" required placeholder="Сообщение">
+    <textarea class="msg-new__text" id="text-msg" required placeholder="Сообщение">
     </textarea>
-    <input class="msg-new__input msg-new__input--sign" v-if="authorized" id="user" type="text" placeholder="Подпись">
-    <button class="msg-new__btn btn" type="submit">
+    <input class="msg-new__sign" v-if="authorized" id="user" type="text" placeholder="Подпись">
+    <button class="msg-new__btn" type="submit">
       Отправить
     </button>
   </form>
@@ -30,20 +30,10 @@ export default {
       this.$emit("submit-new-msg")
     },
     onRoomInput: function (evt) {
-      if (
-          this.$store.state.FORBIDDEN_SYMBOLS.test(evt.target.value) ||
-          evt.target.value.includes("/")
-      ) {
-        evt.target.setCustomValidity("Пожалуйста, не используйте служебные символы")
-      } else if (evt.target.value.includes("#")) {
-        evt.target.setCustomValidity("Пожалуйста, без #")
-      }
-      else if (
-          evt.target.value.trim() === "" ||
-          evt.target.value === '.'
-      ) {
-        evt.target.setCustomValidity("У чата должно быть название")
-      } else {
+      let test = this.$store.state.ALLOWED_SYMBOLS.exec(evt.target.value)
+      if ( test === null || test[0].length !== evt.target.value.length) {
+        evt.target.setCustomValidity("Пожалуйста, используйте только кирилицу, латиницу, цифры и _")
+      }  else {
         evt.target.setCustomValidity("")
       }
     },
@@ -65,10 +55,9 @@ export default {
     grid-row: 3;
 
     position: relative;
-    top: -20px;
   }
 
-  .msg-new__input--room {
+  .msg-new__room {
     height: 40px;
 
     position: absolute;
@@ -78,8 +67,8 @@ export default {
     grid-column: 1;
   }
 
-  .msg-new__input--text {
-    height: 100px;
+  .msg-new__text {
+    height: 80px;
 
     grid-column: 1;
     grid-row: 1/2;
@@ -87,7 +76,7 @@ export default {
     resize: none;
   }
 
-  .msg-new__input--room, .msg-new__input--text {
+  .msg-new__room, .msg-new__text {
     width: 790px;
   }
 
@@ -96,7 +85,7 @@ export default {
     grid-row: 2;
   }
 
-  .msg-new__input--sign {
+  .msg-new__sign {
     width: 165px;
     height: 25px;
     line-height: 45px;
@@ -104,5 +93,10 @@ export default {
 
     grid-column: 2;
     grid-row: 1;
+  }
+
+  .msg-new__btn, .msg-new__sign {
+    position: relative;
+    top: -20px;
   }
 </style>

@@ -108,19 +108,11 @@ export default {
     this.getRooms()
     this.server = new WebSocket("wss://nane.tada.team/ws?username="+this.$store.state.user)
     this.server.onmessage = (evt) => {
-      console.log("SERVER MESSAGE")
       let json = JSON.parse(evt.data)
       if (json.room === this.$store.state.roomCurrent) this.chat.push(this.getRecord(json))
     }
-
-    this.server.onopen = (evt) => {
-      console.log("START WORK")
-      console.log(evt)
-    }
-
-    this.server.onerror = (evt) => {
-      console.log("SERVER ERROR")
-      console.log(evt)
+    this.server.onerror = () => {
+      alert("Ошибка на сервере, подождите или обратитесь к разработчику")
     }
   }
 }
@@ -129,14 +121,13 @@ export default {
 <style>
   .chat {
     width: 1340px;
-    height: 800px;
 
     margin: 0 auto;
     padding: 25px;
 
     display: grid;
-    grid-template-columns: 300px 810px 230px;
-    grid-template-rows: 150px 560px 100px;
+    grid-template-columns: 200px 810px 230px;
+    grid-template-rows: 110px 380px 100px;
     justify-content: center;
 
     background-color: gainsboro;
@@ -145,7 +136,6 @@ export default {
 
   .chat__head {
     display: block;
-    width: 795px;
 
     grid-row: 1;
     grid-column: 2 / 3;

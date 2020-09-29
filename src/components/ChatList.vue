@@ -38,7 +38,7 @@
   .communication {
     display: grid;
     grid-template-columns: 840px 200px;
-    grid-template-rows: 50px 490px 100px;
+    grid-template-rows: 50px 330px 100px;
     grid-row: 2 / 4;
     grid-column: 2 / 4;
 
@@ -64,30 +64,36 @@
 
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 
     margin-bottom: 15px;
     padding: 5px 25px 0 25px;
 
     background-color: #EFF1A8;
     border-radius: 30px;
-
     border-bottom: 1px solid gainsboro;
   }
 
   .chat-list__msg {
     width: inherit;
+    padding-bottom: 15px;
 
     overflow-wrap: break-word;
 
   }
 
   .chat-list__person, .chat-list__date {
-    position: relative;
-    top: 12px;
+    position: absolute;
+    bottom: -12px;
   }
 
   .chat-list__person {
     margin-right: auto;
+    left: 20px;
+  }
+
+  .chat-list__date {
+    right: 20px;
   }
 
   .communication .msg-new {

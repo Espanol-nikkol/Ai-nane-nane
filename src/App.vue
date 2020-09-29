@@ -15,7 +15,7 @@ const store = new Vuex.Store({
   state: {
     user: "Anonimus666",
     roomCurrent: null,
-    FORBIDDEN_SYMBOLS: new RegExp("^[`~@\"#$%^&?*/';:]")
+    ALLOWED_SYMBOLS: new RegExp("^[а-яА-ЯёЁ\\w][а-яА-ЯёЁ\\w]*")
   },
   mutations: {
     auth (state, user) {
@@ -37,10 +37,13 @@ export default {
 </script>
 
 <style>
+  body {
+    margin: 0;
+  }
   main {
     font-family: "Segoe Print", "Times New Roman", sans-serif;
-    font-size: 18px;
-    padding: 100px 0;
+    font-size: 16px;
+    padding: 50px 50px 31px 50px;
 
     background-image: url("assets/back.jpg");
     background-position: 0 0;
@@ -89,6 +92,14 @@ export default {
 
   button:active {
     background-color: #42b983;
+  }
+
+  :-moz-submit-invalid {
+    box-shadow: none;
+  }
+
+  :-moz-ui-invalid {
+    box-shadow:none;
   }
 
 </style>
